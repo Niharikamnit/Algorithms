@@ -1,0 +1,35 @@
+https://www.geeksforgeeks.org/array-rotation/
+
+to rotate array by d times. the array is divided into sets of gcd(d,n)
+
+https://medium.com/@hgarg1010/role-of-gcd-in-juggling-algorithm-aa7671cdd91c
+
+why gcd--- if d and n are multiples then we can easily shift i with d+i
+otherwise we have to run loop only once
+
+void leftRotate(int arr[], int d, int n)
+{
+    /* To handle if d >= n */
+    d = d % n;
+    //gcd will be 1 for both primes. and outer loop will only run once
+    int g_c_d = gcd(d, n);
+    for (int i = 0; i < g_c_d; i++) {
+        /* move i-th values of blocks */
+        int temp = arr[i];
+        int j = i;
+ 
+        while (1) {
+            int k = j + d;
+            if (k >= n)
+                k = k - n;
+ 
+            if (k == i)
+                break;
+ 
+            arr[j] = arr[k];
+            j = k;
+        }
+        arr[j] = temp;
+    }
+}
+ 
